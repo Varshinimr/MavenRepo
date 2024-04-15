@@ -2,29 +2,28 @@ pipeline
 {
     agent any
     stages{
-        stage("Parallel Execution") {
-           steps {
-               parallel{
-                  a: {
+        stage("Cleaning Stage"){
+            steps{
                 bat "mvn clean"
-                }
-                  b: {
+            }
+        }
+        stage("Testing Stage"){
+            steps{
                 bat "mvn test"
-                }
-                  c: {
+            }
+        }
+        stage("Packaging Stage"){
+            steps{
                 bat "mvn package"
-                    }
-                 }    
+            }
         }
-        }
-            
-         stage("Consolidate Result"){
+        stage("Consolidate Result"){
             steps{
                 input("Do you want to capture Result?")
-                junit '**/target/surefire-reports/TEST-*.xml'
+                junit'**/target/surefire-report/TEST-*.xml'
                 archive 'targent/*.jar'
             }
-         }
-
+        }
+        
     }
 }
