@@ -20,7 +20,7 @@ pipeline
          stage("Consolidate Result"){
             steps{
                 input("Do you want to capture Result?")
-                junit'**/target/surefire-report/TEST-*.xml'
+                junit '**/target/surefire-reports/TEST-*.xml'
                 archive 'targent/*.jar'
             }
          }
