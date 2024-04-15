@@ -2,21 +2,22 @@ pipeline
 {
     agent any
     stages{
-        stage("Cleaning Stage"){
-            steps{
-                bat "mvn clean"
-            }
+        stage("Parallel Execution"){
+        steps{
+    parallel{
+        a:{
+            bat "mvn clean"
         }
-        stage("Testing Stage"){
-            steps{
-                bat "mvn test"
-            }
+          b:{
+            bat "mvn test"
         }
-        stage("Packaging Stage"){
-            steps{
-                bat "mvn package"
-            }
+          c:{
+            bat "mvn package"
         }
+    }
+        }
+        }
+            
          stage("Consolidate Result"){
             steps{
                 input("Do you want to capture Result?")
@@ -24,6 +25,9 @@ pipeline
                 archive 'targent/*.jar'
             }
          }
+            stage("Email build"){
+steps{
+    mail body: "${env_JOB_NAME} - Build ${env.BUILD_NUMBER}"
 
     }
 }
