@@ -25,11 +25,6 @@ pipeline
                 archive 'targent/*.jar'
             }
          }
-            stage("Email build"){
-steps{
-    mail body: "${env_JOB_NAME} - Build ${env.BUILD_NUMBER}"
 
-    }
-}
     }
 }
