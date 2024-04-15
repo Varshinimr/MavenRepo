@@ -23,6 +23,7 @@ pipeline
                 junit'**/target/surefire-report/TEST-*.xml'
                 archive 'targent/*.jar'
             }
+         }
 
     }
 }
