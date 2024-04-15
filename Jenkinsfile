@@ -4,19 +4,19 @@ pipeline
     stages{
         stage("Parallel Execution")
         {
-        steps
+           steps
             {
-           parallel{
-        a:{
-            bat "mvn clean"
-        }
-          b:{
-            bat "mvn test"
-        }
-          c:{
-            bat "mvn package"
-        }
-    }
+               parallel {
+                  a: {
+                bat "mvn clean"
+                }
+                  b: {
+                bat "mvn test"
+                }
+                  c: {
+                bat "mvn package"
+                    }
+                 }    
         }
         }
             
